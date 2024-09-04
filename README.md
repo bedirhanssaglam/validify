@@ -1,6 +1,6 @@
-## Validify
-
-`validify` is a robust validation package for Dart and Flutter, designed to simplify and streamline form validation. It provides a flexible framework for creating custom validators and supports both synchronous and asynchronous validation scenarios.
+<p float="center">
+  <img src="https://github.com/user-attachments/assets/4042c25d-4c92-4370-afd3-69bd035b3887" />
+</p>
 
 ## Table of contents
 
@@ -87,7 +87,7 @@ TextFormField(
 
 ### API Reference
 
-#### Validators
+#### Validators
 A utility class for creating and managing validation rules:
 
 - `require({String? message})`: Validator for checking if a value is not empty.
