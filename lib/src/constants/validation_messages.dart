@@ -18,5 +18,6 @@ class ValidationMessages {
   static const String invalidFormat = 'Invalid format';
 
   /// Default message for date validation.
-  static String dateAfter(DateTime date) => 'Date must be after ${date.toLocal()}';
+  static String dateAfter(DateTime date) =>
+      'Date must be after ${date.toLocal()}';
 }
