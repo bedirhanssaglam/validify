@@ -34,7 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
   // Password validator using the Validators class
   final ValidatorFunction _passwordValidator = Validators.combine([
     Validators.require(message: 'Password is required'),
-    Validators.minLength(6, message: (length) => 'Password must be at least $length characters long'),
+    Validators.minLength(
+      6,
+      message: (length) => 'Password must be at least $length characters long',
+    ),
   ]);
 
   @override
@@ -102,6 +105,7 @@ class _EmailValidator extends Validify {
   @override
   List<ValidatorFunction> get validators => [
         Validators.require(message: 'Email is required'),
-        Validators.pattern(RegExp(r'^[^@]+@[^@]+\.[^@]+$'), message: 'Invalid email format'),
+        Validators.pattern(RegExp(r'^[^@]+@[^@]+\.[^@]+$'),
+            message: 'Invalid email format'),
       ];
 }

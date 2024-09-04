@@ -64,7 +64,9 @@ class Validators {
   }) {
     return (value) {
       if (value == null || value.length < length) {
-        return message != null ? message(length) : 'Minimum length is $length characters';
+        return message != null
+            ? message(length)
+            : 'Minimum length is $length characters';
       }
       return null;
     };
@@ -81,7 +83,9 @@ class Validators {
   }) {
     return (value) {
       if (value != null && value.length > length) {
-        return message != null ? message(length) : 'Maximum length is $length characters';
+        return message != null
+            ? message(length)
+            : 'Maximum length is $length characters';
       }
       return null;
     };
