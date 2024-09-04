@@ -1,3 +1,5 @@
+import 'package:validify/src/constants/validation_messages.dart';
+
 /// A typedef for the validator function, which returns an error message
 /// if validation fails, otherwise null.
 typedef ValidatorFunction = String? Function(String? value);
@@ -47,7 +49,7 @@ class Validators {
   static ValidatorFunction require({String? message}) {
     return (value) {
       if (value == null || value.isEmpty) {
-        return message ?? 'This field is required';
+        return message ?? ValidationMessages.requiredField;
       }
       return null;
     };
@@ -66,7 +68,7 @@ class Validators {
       if (value == null || value.length < length) {
         return message != null
             ? message(length)
-            : 'Minimum length is $length characters';
+            : ValidationMessages.minLength(length);
       }
       return null;
     };
@@ -85,7 +87,7 @@ class Validators {
       if (value != null && value.length > length) {
         return message != null
             ? message(length)
-            : 'Maximum length is $length characters';
+            : ValidationMessages.maxLength(length);
       }
       return null;
     };
@@ -100,7 +102,7 @@ class Validators {
   static ValidatorFunction pattern(RegExp pattern, {String? message}) {
     return (value) {
       if (value != null && !pattern.hasMatch(value)) {
-        return message ?? 'Invalid format';
+        return message ?? ValidationMessages.invalidFormat;
       }
       return null;
     };
@@ -149,7 +151,7 @@ class Validators {
   }) {
     return (value) async {
       if (value != null && !pattern.hasMatch(value)) {
-        return message ?? 'Invalid format';
+        return message ?? ValidationMessages.invalidFormat;
       }
       return null;
     };
@@ -191,7 +193,7 @@ class Validators {
       if (value == null) return null;
       final parsedDate = DateTime.tryParse(value);
       if (parsedDate == null || parsedDate.isBefore(date)) {
-        return message ?? 'Date must be after ${date.toLocal()}';
+        return message ?? ValidationMessages.dateAfter(date);
       }
       return null;
     };
