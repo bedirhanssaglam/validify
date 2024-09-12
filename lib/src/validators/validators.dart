@@ -215,4 +215,42 @@ class Validators {
       return null;
     };
   }
+
+  /// Wraps an asynchronous validator with a timeout.
+  ///
+  /// This function takes an [AsyncValidatorFunction] and applies a timeout
+  /// to it. If the validator takes longer than the specified [timeout] duration,
+  /// it will return the [timeoutMessage] (default: 'Validation timed out').
+  ///
+  /// This is useful for scenarios where the validation process involves
+  /// potentially long-running asynchronous operations, such as network calls,
+  /// and you want to ensure that it doesn't exceed a certain time limit.
+  ///
+  /// Example:
+  /// ```dart
+  /// final validator = Validators.withTimeout(
+  ///   someAsyncValidator,
+  ///   Duration(seconds: 5),
+  ///   timeoutMessage: 'Took too long',
+  /// );
+  /// ```
+  ///
+  /// - [validator]: The asynchronous validator function to be wrapped with a timeout.
+  /// - [timeout]: The duration after which the validator will time out.
+  /// - [timeoutMessage]: The error message returned if the validation times out.
+  ///
+  /// Returns a new asynchronous validator function that enforces the specified timeout.
+  static AsyncValidatorFunction withTimeout(
+    AsyncValidatorFunction validator,
+    Duration timeout, {
+    String? timeoutMessage,
+  }) {
+    return (value) async {
+      try {
+        return await validator(value).timeout(timeout);
+      } catch (_) {
+        return timeoutMessage ?? ValidationMessages.timedOut;
+      }
+    };
+  }
 }

@@ -175,5 +175,41 @@ void main() {
       final result = await combinedAsyncValidator('123abc');
       expect(result, 'Only digits allowed');
     });
+
+    test('withTimeout should return validation result if within timeout',
+        () async {
+      final asyncValidator = Validators.asyncPattern(
+        RegExp(r'^\d+$'),
+        message: 'Only digits allowed',
+      );
+
+      // Wrap the validator with timeout (long enough to avoid timeout)
+      final validatorWithTimeout = Validators.withTimeout(
+        asyncValidator,
+        const Duration(seconds: 2),
+      );
+
+      final result = await validatorWithTimeout('123456');
+      expect(result, isNull); // Expecting null for valid input
+    });
+
+    test('withTimeout should return timeout message if timeout occurs',
+        () async {
+      asyncValidator(value) async {
+        // Simulating a delay greater than the timeout duration
+        await Future.delayed(const Duration(seconds: 1));
+        return null; // Return valid result after delay
+      }
+
+      // Setting a short timeout duration to force timeout
+      final validatorWithTimeout = Validators.withTimeout(
+        asyncValidator,
+        const Duration(milliseconds: 100),
+        timeoutMessage: 'Validation timeout',
+      );
+
+      final result = await validatorWithTimeout('123456');
+      expect(result, 'Validation timeout'); // Expecting timeout message
+    });
   });
 }
