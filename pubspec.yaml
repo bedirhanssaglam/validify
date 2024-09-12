@@ -1,6 +1,6 @@
 name: validify
 description: "A powerful validation package designed to simplify and simplify form validation for Dart and Flutter."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/bedirhanssaglam/validify
 repository: https://github.com/bedirhanssaglam/validify
 issue_tracker: https://github.com/bedirhanssaglam/validify/issues

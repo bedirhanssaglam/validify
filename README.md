@@ -42,7 +42,7 @@ To use `validify` in your Dart or Flutter project, add the following dependency 
 
 ```yaml
 dependencies:
-  validify: ^0.0.2
+  validify: ^0.0.3
 ```
 
 Then, run `flutter pub get` to install the package.
