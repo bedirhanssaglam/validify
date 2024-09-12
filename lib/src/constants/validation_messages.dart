@@ -8,6 +8,9 @@ class ValidationMessages {
   /// Default message for required fields.
   static const String requiredField = 'This field is required';
 
+  /// Default message for time out.
+  static const String timedOut = 'Validation timed out';
+
   /// Default message for minimum length validation.
   static String minLength(int length) => 'Minimum length is $length characters';
 
